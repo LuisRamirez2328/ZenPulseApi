@@ -1,5 +1,7 @@
 require('dotenv').config()
 require("./database/database").connect()
+
+const bodyParser = require('body-parser');
 const User = require('./model/user')
 const express = require('express')
 const bcrypt = require('bcryptjs')
@@ -11,6 +13,7 @@ const auth = require('./middleware/auth')
 const app = express()
 
 app.use(express.json())
+app.use(bodyParser.json());
 app.use(cookieParser())
 app.use(cors({
     origin: '*'
@@ -68,6 +71,7 @@ app.post("/register", async (req, res) => {
 app.post('/login', async (req, res) => {
     try {
         // Obtener todos los datos del frontend
+        console.log(req.body)
         const { email, password } = req.body;
         
         // Validación
