@@ -10,15 +10,11 @@ const auth = require('./middleware/auth')
 
 const app = express()
 
-const corsOptions = {
-    origin: '*',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-  };
-
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors(corsOptions));
+app.use(cors({
+    origin: '*'
+}));
 
 app.get("/", (req, res) => {
     res.send("<h1>Server is working</h1>")
