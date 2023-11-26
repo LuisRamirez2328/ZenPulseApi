@@ -23,6 +23,17 @@ app.get("/", (req, res) => {
     res.send("<h1>Server is working</h1>")
 })
 
+
+app.get("/list", async (req, res) => {
+    try {
+        const usuarios = await User.find({});
+        return res.status(200).json(usuarios);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+})
+
 app.post("/register", async (req, res) => {
     try {
         //get all data from body
